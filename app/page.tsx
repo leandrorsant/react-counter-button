@@ -1,19 +1,26 @@
 "use client"
 import Image from "next/image";
+import ButtonSharedState from "./components/button-shared-state";
 import { useState } from "react";
+import { ButtonIndependentState } from "./components/button-independent-state";
+
 
 export default function Home() {
+  const [count, setCount] = useState(0)
+
+  const handleClick = () => setCount((count)=>count+1)
+
   return (
     <main className="flex min-h-screen flex-col items-center p-24 gap-4">
-      <h1>React Counter Button</h1>
-      <Button></Button>
+      <h1 className="text-3xl font-bold">React Counter Buttons</h1>
+      <h2 className="text-xl">Buttons with shared state</h2>
+      <ButtonSharedState count={count} onClick={handleClick} />
+      <ButtonSharedState count={count} onClick={handleClick} />
+      <h2 className="text-xl">Buttons with independent state</h2>
+      <ButtonIndependentState />
+      <ButtonIndependentState />
     </main>
   );
 }
 
-function Button(){
-  const [count, setCount] = useState(0)
-  return <button onClick={()=> setCount((count)=> count+1)} className="bg-blue-500 hover:bg-blue-700 rounded text-white font-bold px-4 py-2">
-              {"I have been clicked "+count+" times"}
-        </button>
-}
+
